@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "target": "ES2022",
+      "module": "node16",
+      "declaration": true,
+      "removeComments": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "allowJs": true,
+      "sourceMap": true,
+      // "rootDir": "./src",
+      "outDir": "./dist",
+      "baseUrl": "./",
+      "incremental": true,
+      "skipLibCheck": true,
+      "strictNullChecks": false,
+      "noImplicitAny": false,
+      "strictBindCallApply": false,
+      "forceConsistentCasingInFileNames": false,
+      "noFallthroughCasesInSwitch": false,
+      "paths": {
+        // "@order/*": ["src/order/*"],
+      }
+    },
+    "include": [
+      "src/**/*.ts", 
+      "src/apps/*.ts", 
+    ],
+    "exclude": ["node_modules"]
+  }

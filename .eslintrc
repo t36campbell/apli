@@ -1,0 +1,61 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "plugins": [
+      "prettier", 
+      "@typescript-eslint", 
+      "eslint-plugin-jest", 
+      "eslint-plugin-prettier"
+    ],
+    "extends": [
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "prettier/prettier":  [
+        "error",
+        {
+          "trailingComma": "all",
+          "printWidth": 80,
+          "tabWidth": 2,
+          "endOfLine": "auto",
+          "singleQuote": true,
+          "jsxSingleQuote": true,
+          "arrowParens": "avoid"
+        }
+      ],
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "quotes": "off",
+      "@typescript-eslint/quotes": [
+        2,
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ],
+      "@typescript-eslint/no-unused-vars": [2, { "argsIgnorePattern": "^_" }]
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {
+          "project": "."
+        }
+      }
+    },
+    "globals": {
+      "JSX": true,
+      "it": true
+    }
+  }
