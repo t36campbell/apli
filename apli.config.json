@@ -1,0 +1,28 @@
+{
+  "first": "Tyler",
+  "last": "Campbell",
+  "email": "tcampbell3683@gmail.com",
+  "phone": "4403649817",
+  "employer": "Tufin",
+  "resume": "/Users/tyler/Desktop/projects/apli/assets/Tyler Campbell Resume (2024).pdf",
+  "address": {
+    "street": "",
+    "city": "Wadsworth",
+    "state": "Ohio",
+    "country": "US"
+  },
+  "demographics": {
+    "sponsor": false,
+    "gender": "Male",
+    "hispanic": false,
+    "race": "Two or More Races",
+    "veteran": true,
+    "disability": false,
+    "authorized": true
+  },
+  "socials": {
+    "github": "https://github.com/t36campbell",
+    "linkedin": "https://www.linkedin.com/in/t36campbell",
+    "website": "https://tylercampbell.space"
+  }
+}
