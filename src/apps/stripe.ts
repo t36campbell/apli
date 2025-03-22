@@ -39,24 +39,25 @@ export const stripe = async (url: string) => {
 
   await page.goto(url.endsWith('/apply') ? url : `${url}/apply`);
 
+  const iframe = 'iframe[title="Greenhouse Job Board"]'
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/first name/i)
     .fill(CONFIG.first);
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/last name/i)
     .fill(CONFIG.last);
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/email/i)
     .fill(CONFIG.email);
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/phone/i)
     .fill(CONFIG.phone);
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/employer/i)
     .fill(CONFIG.employer);
 
@@ -64,11 +65,11 @@ export const stripe = async (url: string) => {
     const location = CONFIG.address?.country as LOCATION;
     const options = { timeout: 300 };
     await page
-      .frameLocator('iframe[title="Greenhouse Job Board"]')
+      .frameLocator(iframe)
       .getByLabel(/reside/i)
       .selectOption({ label: location.toString() }, options);
     await page
-      .frameLocator('iframe[title="Greenhouse Job Board"]')
+      .frameLocator(iframe)
       .getByLabel(location.toString(), { ...options, exact: true })
       .check();
   } catch {
@@ -80,28 +81,28 @@ export const stripe = async (url: string) => {
   }
 
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/authorized/i)
     .selectOption({ label: CONFIG.demographics.authorized ? 'Yes' : 'No' });
   await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/sponsor/i)
     .selectOption({ label: CONFIG.demographics.sponsor ? 'Yes' : 'No' });
 
   let remote = page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/remote/i);
   if (await remote.isVisible()) {
     await remote.selectOption({ index: 1 });
   }
   let gender = page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/gender/i);
   if (await gender.isVisible()) {
     await gender.selectOption({ label: CONFIG.demographics.gender });
   }
   let hispanic = page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/hispanic/i);
   if (await hispanic.isVisible()) {
     await hispanic.selectOption({
@@ -109,19 +110,19 @@ export const stripe = async (url: string) => {
     });
   }
   let race = page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/race/i);
   if (await race.isVisible()) {
     await race.selectOption({ label: 'Two or More Races' });
   }
   let veteran = page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/veteran/i);
   if (await veteran.isVisible()) {
     await veteran.selectOption({ index: CONFIG.demographics.veteran ? 2 : 1 });
   }
   let disability = page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByLabel(/disability/i);
   if (await disability.isVisible()) {
     await disability.selectOption({
@@ -131,7 +132,7 @@ export const stripe = async (url: string) => {
   const [fileChooser] = await Promise.all([
     page.waitForEvent('filechooser'),
     await page
-      .frameLocator('iframe[title="Greenhouse Job Board"]')
+      .frameLocator(iframe)
       .locator('#resume_fieldset')
       .getByRole('button', { name: /Attach/ })
       .click(),
@@ -140,7 +141,7 @@ export const stripe = async (url: string) => {
   await fileChooser.setFiles(CONFIG.resume);
 
   let submit = await page
-    .frameLocator('iframe[title="Greenhouse Job Board"]')
+    .frameLocator(iframe)
     .getByRole('button', { name: /Submit Application/ });
 
   const button = chalk.underline.cyan('Submit Application');
