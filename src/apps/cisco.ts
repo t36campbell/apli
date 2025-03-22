@@ -21,6 +21,7 @@ export const cisco = async (url: string) => {
     .locator('div')
     .filter({ hasText: 'No' })
     .click();
+    
   await page
     .getByLabel('Can you speak fluent English')
     .getByLabel('Yes')

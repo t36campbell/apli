@@ -39,23 +39,20 @@ export const stripe = async (url: string) => {
 
   await page.goto(url.endsWith('/apply') ? url : `${url}/apply`);
 
-  const iframe = 'iframe[title="Greenhouse Job Board"]'
+  const iframe = 'iframe[title="Greenhouse Job Board"]';
   await page
     .frameLocator(iframe)
     .getByLabel(/first name/i)
     .fill(CONFIG.first);
+
   await page
     .frameLocator(iframe)
     .getByLabel(/last name/i)
     .fill(CONFIG.last);
-  await page
-    .frameLocator(iframe)
-    .getByLabel(/email/i)
-    .fill(CONFIG.email);
-  await page
-    .frameLocator(iframe)
-    .getByLabel(/phone/i)
-    .fill(CONFIG.phone);
+
+  await page.frameLocator(iframe).getByLabel(/email/i).fill(CONFIG.email);
+  await page.frameLocator(iframe).getByLabel(/phone/i).fill(CONFIG.phone);
+
   await page
     .frameLocator(iframe)
     .getByLabel(/employer/i)
@@ -68,13 +65,16 @@ export const stripe = async (url: string) => {
       .frameLocator(iframe)
       .getByLabel(/reside/i)
       .selectOption({ label: location.toString() }, options);
+
     await page
       .frameLocator(iframe)
       .getByLabel(location.toString(), { ...options, exact: true })
       .check();
+
   } catch {
     const log = console.log;
     const error = `STRIPE LOCATION ${CONFIG.address?.country} NOT SUPPORTED\n`;
+
     log(chalk.bold.red(error));
     log(chalk.yellow('Try one of these:\n\n'));
     log(chalk.green(`${Object.values(LOCATION).join('\n')}\n`));
@@ -84,51 +84,46 @@ export const stripe = async (url: string) => {
     .frameLocator(iframe)
     .getByLabel(/authorized/i)
     .selectOption({ label: CONFIG.demographics.authorized ? 'Yes' : 'No' });
+
   await page
     .frameLocator(iframe)
     .getByLabel(/sponsor/i)
     .selectOption({ label: CONFIG.demographics.sponsor ? 'Yes' : 'No' });
 
-  let remote = page
-    .frameLocator(iframe)
-    .getByLabel(/remote/i);
+  let remote = page.frameLocator(iframe).getByLabel(/remote/i);
   if (await remote.isVisible()) {
     await remote.selectOption({ index: 1 });
   }
-  let gender = page
-    .frameLocator(iframe)
-    .getByLabel(/gender/i);
+
+  let gender = page.frameLocator(iframe).getByLabel(/gender/i);
   if (await gender.isVisible()) {
     await gender.selectOption({ label: CONFIG.demographics.gender });
   }
-  let hispanic = page
-    .frameLocator(iframe)
-    .getByLabel(/hispanic/i);
+
+  let hispanic = page.frameLocator(iframe).getByLabel(/hispanic/i);
   if (await hispanic.isVisible()) {
     await hispanic.selectOption({
       label: CONFIG.demographics.hispanic ? 'Yes' : 'No',
     });
   }
-  let race = page
-    .frameLocator(iframe)
-    .getByLabel(/race/i);
+
+  let race = page.frameLocator(iframe).getByLabel(/race/i);
   if (await race.isVisible()) {
     await race.selectOption({ label: 'Two or More Races' });
   }
-  let veteran = page
-    .frameLocator(iframe)
-    .getByLabel(/veteran/i);
+
+  let veteran = page.frameLocator(iframe).getByLabel(/veteran/i);
   if (await veteran.isVisible()) {
     await veteran.selectOption({ index: CONFIG.demographics.veteran ? 2 : 1 });
   }
-  let disability = page
-    .frameLocator(iframe)
-    .getByLabel(/disability/i);
+
+  let disability = page.frameLocator(iframe).getByLabel(/disability/i);
   if (await disability.isVisible()) {
     await disability.selectOption({
       index: CONFIG.demographics.disability ? 1 : 2,
     });
   }
+  
   const [fileChooser] = await Promise.all([
     page.waitForEvent('filechooser'),
     await page

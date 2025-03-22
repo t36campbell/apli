@@ -17,6 +17,7 @@ export const cloudflare = async (url: string) => {
     location.click();
     await page.locator('#location_autocomplete-items-popup-option-0').click();
   }
+
   let legalName = page.getByLabel(/Legal Name */, { exact: true });
   if (await legalName.isVisible()) {
     await legalName.fill('Tyler Campbell');
@@ -49,18 +50,22 @@ export const cloudflare = async (url: string) => {
   if (await gender.isVisible()) {
     await gender.selectOption({ label: 'Male' });
   }
+
   let hispanic = page.getByLabel(/hispanic/i);
   if (await hispanic.isVisible()) {
     await hispanic.selectOption({ label: 'No' });
   }
+
   let race = page.getByLabel(/race/i);
   if (await race.isVisible()) {
     await race.selectOption({ label: 'Two or More Races' });
   }
+
   let veteran = page.getByLabel(/veteran/i);
   if (await veteran.isVisible()) {
     await veteran.selectOption({ index: 2 });
   }
+  
   let disability = page.getByLabel(/disability/i);
   if (await disability.isVisible()) {
     await disability.selectOption({ index: 2 });
