@@ -7,6 +7,7 @@
     "apli": "dist/apli.js"
   },
   "scripts": {
+    "build": "tsc",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --fix"
   },
   "keywords": [],
