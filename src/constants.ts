@@ -9,7 +9,7 @@ import { github } from './apps/github';
 import { google } from './apps/google';
 import { meta } from './apps/meta';
 import { microsoft } from './apps/microsoft';
-import { netlfix } from './apps/netflix';
+import { netflix } from './apps/netflix';
 import { nvidia } from './apps/nvidia';
 import { okta } from './apps/okta';
 import { shopify } from './apps/shopify';
@@ -29,7 +29,7 @@ export const APPLICATIONS = {
   google,
   meta,
   microsoft,
-  netlfix,
+  netflix,
   nvidia,
   okta,
   shopify,

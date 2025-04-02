@@ -7,7 +7,7 @@ export interface Apps {
   google: string[];
   meta: string[];
   microsoft: string[];
-  netlfix: string[];
+  netflix: string[];
   nvidia: string[];
   okta: string[];
   shopify: string[];
